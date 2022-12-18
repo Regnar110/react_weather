@@ -6,25 +6,54 @@ class App extends Component {
   constructor(){
     super();
     this.state = {
+      locationSearchInput: "",
       currentLocation: [],
       currentWeather: []
     }
   }
 
+  onLocationSearchInputChange = (event) => {
+    this.setState({locationSearchInput: event.target.value})
+  }
+
+  onLocationSearchInputSubmit = async () => {
+    const response = await fetch('http://localhost:3600/initCurrentUserGeoPosition', {
+        method: 'POST', // *GET, POST, PUT, DELETE, etc.
+        mode: 'cors', // no-cors, *cors, same-origin
+        body: JSON.stringify({
+          locationName: this.state.locationSearchInput
+        }),
+        headers: {"Content-Type": "application/json"}
+      })
+      const locationRes = await response.json();
+      const { city, country, currentWeather } = locationRes;
+      console.log({
+        city:city,
+        country: country,
+        weather: currentWeather
+      })
+      this.setState({
+        currentLocation: [{
+          city: city,
+          country: country
+        }],
+        currentWeather: currentWeather
+      })
+  }
+
   initCurrentUserPositionLoad = async ({coords}) => {
-    console.log(coords)
     const { latitude, longitude } = coords;
       const response = await fetch('http://localhost:3600/initCurrentUserGeoPosition', {
         method: 'POST', // *GET, POST, PUT, DELETE, etc.
         mode: 'cors', // no-cors, *cors, same-origin
         body: JSON.stringify({
-          lat: latitude,
-          lon: longitude
+          latitude: latitude,
+          longitude: longitude
         }),
         headers: {"Content-Type": "application/json"}
       })
       const {city, country, currentWeather} = await response.json();
-      console.log(city, country, currentWeather)
+      console.log( city, country, currentWeather)
       this.setState(
         {
           currentLocation: [{
@@ -47,7 +76,7 @@ class App extends Component {
       <h1>Loading</h1>
     : 
     <React.Fragment>
-      <LocationSearch />
+      <LocationSearch inputChange={this.onLocationSearchInputChange} submitLocationSearch={this.onLocationSearchInputSubmit}/>
     </React.Fragment>
   }
 }

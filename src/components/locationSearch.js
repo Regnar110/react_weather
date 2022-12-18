@@ -3,9 +3,10 @@ import '../styles/locationsearch.scss';
 
 const LocationSearch = (props) => {
     return(
-        <form>
-            <input type='text' placeholder='city name'></input>
-        </form>
+        <div>
+            <input type='text' placeholder='city name' onChange={props.inputChange}></input>
+            <button type='submit' onClick={props.submitLocationSearch}>Submit data</button>
+        </div>
     )
 }
 
