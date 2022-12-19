@@ -13,12 +13,12 @@ class App extends Component {
   }
 
   onEnterInputSubmit = (event) => {
-    return event.key === 'Enter' ? this.onLocationSearchInputSubmit : null;
+    return event.key === 'Enter' ? this.onLocationSearchInputSubmit() : null;
   }
   
   onDropdownSearchInputChange = (place) => {
-    const {long_name} = place.address_components[0]
-    this.setState({locationSearchInput: long_name});
+    console.log(place)
+    this.setState({locationSearchInput: place.address_components[0].long_name})
   }
 
   onLocationSearchInputChange = (event) => {
@@ -26,6 +26,7 @@ class App extends Component {
   }
 
   onLocationSearchInputSubmit = async () => {
+    console.log(this.state.locationSearchInput)
     const response = await fetch('http://localhost:3600/initCurrentUserGeoPosition', {
         method: 'POST', // *GET, POST, PUT, DELETE, etc.
         mode: 'cors', // no-cors, *cors, same-origin
@@ -35,19 +36,24 @@ class App extends Component {
         headers: {"Content-Type": "application/json"}
       })
       const locationRes = await response.json();
-      const { city, country, currentWeather } = locationRes;
-      console.log({
-        city:city,
-        country: country,
-        weather: currentWeather
-      })
-      this.setState({
-        currentLocation: [{
-          city: city,
-          country: country
-        }],
-        currentWeather: currentWeather
-      })
+      if('error' in locationRes) {
+        console.log(locationRes)
+      } else {
+        const { city, country, currentWeather } = locationRes;
+        console.log({
+          city:city,
+          country: country,
+          weather: currentWeather
+        })
+        this.setState({
+          currentLocation: [{
+            city: city,
+            country: country
+          }],
+          currentWeather: currentWeather
+        })  
+      }
+
   }
 
   initCurrentUserPositionLoad = async ({coords}) => {
@@ -85,7 +91,7 @@ class App extends Component {
       <h1>Loading</h1>
     : 
     <React.Fragment>
-      <LocationSearch inputChange={this.onLocationSearchInputChange} submitLocationSearch={this.onLocationSearchInputSubmit} dropdownChange={this.onDropdownSearchInputChange} enterPress={this.onEnterInputSubmit}/>
+      <LocationSearch inputValue={this.state.locationSearchInput} inputChange={this.onLocationSearchInputChange} submitLocationSearch={this.onLocationSearchInputSubmit} dropdownChange={this.onDropdownSearchInputChange}/>
     </React.Fragment>
   }
 }

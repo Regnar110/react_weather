@@ -59,7 +59,6 @@ class LocationSearch extends Component {
                         onChange={this.props.inputChange}
                         apiKey={'AIzaSyB4pdAcpJJlCaPXmD-7_417eA-N3u5-3L0'}
                         onPlaceSelected={this.props.dropdownChange}
-                        onKeyPress={this.props.enterSubmit}
                     />;
                     <CustomButton type='submit' text='Search' eventHandler={this.props.submitLocationSearch} />
                 </div>
