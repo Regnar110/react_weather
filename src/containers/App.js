@@ -26,7 +26,6 @@ class App extends Component {
   }
 
   onLocationSearchInputSubmit = async () => {
-    console.log(this.state.locationSearchInput)
     const response = await fetch('http://localhost:3600/initCurrentUserGeoPosition', {
         method: 'POST', // *GET, POST, PUT, DELETE, etc.
         mode: 'cors', // no-cors, *cors, same-origin
@@ -53,7 +52,6 @@ class App extends Component {
           currentWeather: currentWeather
         })  
       }
-
   }
 
   initCurrentUserPositionLoad = async ({coords}) => {

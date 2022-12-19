@@ -7,44 +7,8 @@ class LocationSearch extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            autoCompleteArray: [
-                {
-                    city: "Gdańsk",
-                    country: "Poland"
-                },
-                {
-                    city: "Gdańsk",
-                    country: "Poland"
-                },
-                {
-                    city: "Gdańsk",
-                    country: "Poland"
-                },
-                {
-                    city: "Gdańsk",
-                    country: "Poland"
-                },
-                {
-                    city: "Gdańsk",
-                    country: "Poland"
-                },
-                {
-                    city: "Gdańsk",
-                    country: "Poland"
-                },
-                {
-                    city: "Gdańsk",
-                    country: "Poland"
-                },
-                {
-                    city: "Gdańsk",
-                    country: "Poland"
-                },
-            ],
-            isAutoCompleteOpen: false
         }
     }
-
     render() {
         return(
         <nav className='top-fixed-nav'>
