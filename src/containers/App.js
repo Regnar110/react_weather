@@ -12,6 +12,15 @@ class App extends Component {
     }
   }
 
+  onEnterInputSubmit = (event) => {
+    return event.key === 'Enter' ? this.onLocationSearchInputSubmit : null;
+  }
+  
+  onDropdownSearchInputChange = (place) => {
+    const {long_name} = place.address_components[0]
+    this.setState({locationSearchInput: long_name});
+  }
+
   onLocationSearchInputChange = (event) => {
     this.setState({locationSearchInput: event.target.value})
   }
@@ -76,7 +85,7 @@ class App extends Component {
       <h1>Loading</h1>
     : 
     <React.Fragment>
-      <LocationSearch inputChange={this.onLocationSearchInputChange} submitLocationSearch={this.onLocationSearchInputSubmit}/>
+      <LocationSearch inputChange={this.onLocationSearchInputChange} submitLocationSearch={this.onLocationSearchInputSubmit} dropdownChange={this.onDropdownSearchInputChange} enterPress={this.onEnterInputSubmit}/>
     </React.Fragment>
   }
 }

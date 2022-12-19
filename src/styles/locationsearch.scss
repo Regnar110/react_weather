@@ -6,7 +6,6 @@
     width: 100%;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
     align-items: center;
     background-color: hsl(195, 100%, 45%);
     padding: 50px 10px;
@@ -14,55 +13,55 @@
     .searchField {
         width: 100%;
         display: flex;
+        flex-direction: column;
         justify-content: center;
         align-items: center;
-        gap: 30px;
-        #locationSearchBox {
-            font-family: 'Lato', sans-serif;
-            font-size: 15px;
-            background-color: #FFFFFF;
-            color: black;
-            border-radius: 15px;
-            border: 2px solid #E9F1FA;;
-            width: 50%;
-            height: 60px;
-        }
+
+        .inputAndSubmit {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            .pac-target-input {
+                font-family: 'Lato', sans-serif;
+                font-size: 15px;
+                background-color: #FFFFFF;
+                color: black;
+                width: 50%;
+                height: 60px;
+                border: none;
+            }
+            
+            .pac-target-input::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+                color: rgba(0, 0, 0, 0.438);
+                opacity: 1; /* Firefox */
+            }
+            .pac-target-input::-ms-input-placeholder { /* Microsoft Edge */
+                color: rgba(0, 0, 0, 0.438);
+            }
+            .pac-target-input::-ms-input-placeholder { /* Microsoft Edge */
+                color: rgba(0, 0, 0, 0.438);
+            }
         
-        #locationSearchBox::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
-            color: rgba(0, 0, 0, 0.438);
-            opacity: 1; /* Firefox */
+            .pac-target-input:active {
+                outline: none;
+            }
+            .pac-target-input:focus {
+                outline: none;
+            }
         }
-        #locationSearchBox::-ms-input-placeholder { /* Microsoft Edge */
-            color: rgba(0, 0, 0, 0.438);
-        }
-        #locationSearchBox::-ms-input-placeholder { /* Microsoft Edge */
-            color: rgba(0, 0, 0, 0.438);
-        }
-    
-        #locationSearchBox:active {
-            outline: none;
-        }
-        #locationSearchBox:focus {
-            outline: none;
-        }
-    
-        #locationSearchSubmitButton {
-            font-family: 'Lato', sans-serif;
-            cursor: pointer;
-            background-color: #FFFFFF;
-            font-size: 15px;
-            font-weight: 600;
-            color: hsl(195, 100%, 45%);
-            border-radius: 7px;
-            padding: 10px 25px;
-            border: none;
-        }
-    
-        #locationSearchSubmitButton:active {
-            outline: none;
-        }
-        #locationSearchSubmitButton:focus {
-            outline: none;
+            .autocompleteLocations {
+                position: relative;
+                font-family: 'Lato', sans-serif;
+                display: flex;
+                flex-direction: column;
+                width: 60%;
+                height: 150px;
+                background-color: #FFFFFF;
+                border-top: 1px solid hsl(195, 100%, 45%);
+                overflow-x: hidden;
+                overflow-y: scroll;  
+          }
         }
     }
-}

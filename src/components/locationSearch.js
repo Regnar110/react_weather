@@ -1,8 +1,52 @@
-import React from 'react';
+import React, {Component} from 'react';
 import '../styles/locationsearch.scss';
+import Autocomplete from "react-google-autocomplete";
+import CustomButton from './CustomButton.js'
 
-const LocationSearch = (props) => {
-    return(
+class LocationSearch extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            autoCompleteArray: [
+                {
+                    city: "Gdańsk",
+                    country: "Poland"
+                },
+                {
+                    city: "Gdańsk",
+                    country: "Poland"
+                },
+                {
+                    city: "Gdańsk",
+                    country: "Poland"
+                },
+                {
+                    city: "Gdańsk",
+                    country: "Poland"
+                },
+                {
+                    city: "Gdańsk",
+                    country: "Poland"
+                },
+                {
+                    city: "Gdańsk",
+                    country: "Poland"
+                },
+                {
+                    city: "Gdańsk",
+                    country: "Poland"
+                },
+                {
+                    city: "Gdańsk",
+                    country: "Poland"
+                },
+            ],
+            isAutoCompleteOpen: false
+        }
+    }
+
+    render() {
+        return(
         <nav className='top-fixed-nav'>
             <div className='nav'>
                 social
@@ -10,15 +54,19 @@ const LocationSearch = (props) => {
                 social
             </div>
             <div className='searchField'>
-                 <input id='locationSearchBox' list='locations' type='text' placeholder='city name' onChange={props.inputChange}></input>
-                 <datalist className="searchLocationsDatas" id='locations'>
-                    <option>Gdańsk</option>
-                 </datalist>
-                <button id='locationSearchSubmitButton' type='submit' onClick={props.submitLocationSearch}>Search</button>
+                <div className='inputAndSubmit'>
+                    <Autocomplete
+                        onChange={this.props.inputChange}
+                        apiKey={'AIzaSyB4pdAcpJJlCaPXmD-7_417eA-N3u5-3L0'}
+                        onPlaceSelected={this.props.dropdownChange}
+                        onKeyPress={this.props.enterSubmit}
+                    />;
+                    <CustomButton type='submit' text='Search' eventHandler={this.props.submitLocationSearch} />
+                </div>
             </div>
         </nav>
-           
-    )
+        )
+    }
 }
 
 export default LocationSearch;
