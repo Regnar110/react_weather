@@ -16,7 +16,7 @@ const CustomSearchInput = (props) => {
                 {
                     data ? 
                         data.map(el => el.split(",")).map((el, i) => 
-                            <div className='pac-element' value={el[0]} key={i}>
+                            <div className='pac-element' key={i}>
                                 <i className="fa-solid fa-location-pin fa-xs"></i>
                                 {el[0]}, <span>
                                     {`${el[1]} ${el[2]? `, ${el[2]}`:''}`}
