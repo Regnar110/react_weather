@@ -8,7 +8,8 @@ class App extends Component {
     this.state = {
       locationSearchInput: "",
       currentLocation: [],
-      currentWeather: []
+      currentWeather: [],
+      pacSuggestions: []
     }
   }
 
@@ -21,8 +22,18 @@ class App extends Component {
     this.setState({locationSearchInput: place.address_components[0].long_name})
   }
 
-  onLocationSearchInputChange = (event) => {
+  onLocationSearchInputChange = async (event) => {
     this.setState({locationSearchInput: event.target.value})
+    const response = await fetch('http://localhost:3600/suggestions', {
+      method: 'POST', // *GET, POST, PUT, DELETE, etc.
+      mode: 'cors', // no-cors, *cors, same-origin
+      body: JSON.stringify({
+        input: event.target.value
+      }),
+      headers: {"Content-Type": "application/json"}
+    })
+    const data = await response.json()
+    this.setState({pacSuggestions: data})
   }
 
   onLocationSearchInputSubmit = async () => {
@@ -89,7 +100,7 @@ class App extends Component {
       <h1>Loading</h1>
     : 
     <React.Fragment>
-      <LocationSearch inputValue={this.state.locationSearchInput} inputChange={this.onLocationSearchInputChange} submitLocationSearch={this.onLocationSearchInputSubmit} dropdownChange={this.onDropdownSearchInputChange}/>
+      <LocationSearch inputValue={this.state.locationSearchInput} inputChange={this.onLocationSearchInputChange} submitLocationSearch={this.onLocationSearchInputSubmit} dropdownChange={this.onDropdownSearchInputChange} pac={this.state.pacSuggestions}/>
     </React.Fragment>
   }
 }

@@ -1,0 +1,58 @@
+.pac-input {
+    position: relative;
+    width: 100%;
+    .pac-target-input {
+        font-family: 'Lato', sans-serif;
+        font-size: 15px;
+        background-color: #FFFFFF;
+        color: black;
+        width: 100%;
+        height: 60px;
+        border: none;
+    }
+    
+    .pac-target-input::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+        color: rgba(0, 0, 0, 0.438);
+        opacity: 1; /* Firefox */
+    }
+    .pac-target-input::-ms-input-placeholder { /* Microsoft Edge */
+        color: rgba(0, 0, 0, 0.438);
+    }
+    .pac-target-input::-ms-input-placeholder { /* Microsoft Edge */
+        color: rgba(0, 0, 0, 0.438);
+    }
+    
+    .pac-target-input:active {
+        outline: none;
+    }
+    .pac-target-input:focus {
+        outline: none;
+    }
+
+    .pac-dropdown {
+        width: 100%;
+        background-color: #E9F1FA;
+        position: absolute;
+
+        .pac-element {
+            font-family: 'Lato', sans-serif;
+            width: 100%;
+            padding: 10px 0px;
+            cursor: pointer;
+            transition: .3s all;
+            &:hover {
+                background-color: #dbdbdb;
+            }
+
+            .fa-location-pin {
+                padding: 5px;
+                color: #00ABE4;
+            }
+
+            span {
+                font-size: 13px;
+                color: rgb(119, 119, 119);
+            }
+        }
+    }
+}

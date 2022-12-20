@@ -18,38 +18,10 @@
         align-items: center;
 
         .inputAndSubmit {
-            width: 100%;
+            width: 60%;
             display: flex;
             justify-content: center;
             align-items: center;
-
-            .pac-target-input {
-                font-family: 'Lato', sans-serif;
-                font-size: 15px;
-                background-color: #FFFFFF;
-                color: black;
-                width: 50%;
-                height: 60px;
-                border: none;
-            }
-            
-            .pac-target-input::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
-                color: rgba(0, 0, 0, 0.438);
-                opacity: 1; /* Firefox */
-            }
-            .pac-target-input::-ms-input-placeholder { /* Microsoft Edge */
-                color: rgba(0, 0, 0, 0.438);
-            }
-            .pac-target-input::-ms-input-placeholder { /* Microsoft Edge */
-                color: rgba(0, 0, 0, 0.438);
-            }
-        
-            .pac-target-input:active {
-                outline: none;
-            }
-            .pac-target-input:focus {
-                outline: none;
-            }
         }
             .autocompleteLocations {
                 position: relative;

@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import '../styles/locationsearch.scss';
-import Autocomplete from "react-google-autocomplete";
+import CustomSearchInput from './CustomSearchInput';
 import CustomButton from './CustomButton.js'
 
 class LocationSearch extends Component {
@@ -19,11 +19,7 @@ class LocationSearch extends Component {
             </div>
             <div className='searchField'>
                 <div className='inputAndSubmit'>
-                    <Autocomplete
-                        onChange={this.props.inputChange}
-                        apiKey={'AIzaSyB4pdAcpJJlCaPXmD-7_417eA-N3u5-3L0'}
-                        onPlaceSelected={this.props.dropdownChange}
-                    />;
+                    <CustomSearchInput onChange={this.props.inputChange} pac={this.props.pac}/>
                     <CustomButton type='submit' text='Search' eventHandler={this.props.submitLocationSearch} />
                 </div>
             </div>
