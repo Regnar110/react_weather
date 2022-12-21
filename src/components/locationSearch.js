@@ -19,7 +19,7 @@ class LocationSearch extends Component {
             </div>
             <div className='searchField'>
                 <div className='inputAndSubmit'>
-                    <CustomSearchInput onChange={this.props.inputChange} pac={this.props.pac}/>
+                    <CustomSearchInput inputValue={this.props.inputValue} onChange={this.props.inputChange} pac={this.props.pac} onPacClick={this.props.onPacClick}/>
                     <CustomButton type='submit' text='Search' eventHandler={this.props.submitLocationSearch} />
                 </div>
             </div>
@@ -29,5 +29,3 @@ class LocationSearch extends Component {
 }
 
 export default LocationSearch;
-
-//https://developers.google.com/maps/documentation/javascript/place-autocomplete

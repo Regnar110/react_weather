@@ -13,17 +13,7 @@ class App extends Component {
     }
   }
 
-  onEnterInputSubmit = (event) => {
-    return event.key === 'Enter' ? this.onLocationSearchInputSubmit() : null;
-  }
-  
-  onDropdownSearchInputChange = (place) => {
-    console.log(place)
-    this.setState({locationSearchInput: place.address_components[0].long_name})
-  }
-
-  onLocationSearchInputChange = async (event) => {
-    this.setState({locationSearchInput: event.target.value})
+  onLocationSearchInputChange = async (event) => { // wywołane przy zmianach w polu input wprowadzonych przez użytkownika. Wykonanie żądania do serwera o sugestie dotyczące wprowadzonego przez użytkownika słowa
     const response = await fetch('http://localhost:3600/suggestions', {
       method: 'POST', // *GET, POST, PUT, DELETE, etc.
       mode: 'cors', // no-cors, *cors, same-origin
@@ -33,10 +23,20 @@ class App extends Component {
       headers: {"Content-Type": "application/json"}
     })
     const data = await response.json()
-    this.setState({pacSuggestions: data})
+    this.setState({pacSuggestions: data, locationSearchInput: event.target.value}, () => console.log(this.state.pacSuggestions))
   }
 
-  onLocationSearchInputSubmit = async () => {
+  onPacElementClick = (event) => {
+    const locationName = event.target.attributes.name.value;
+    this.setState({
+      locationSearchInput: locationName
+    }, this.onLocationSearchInputSubmit)
+  }
+
+  onLocationSearchInputSubmit = async () => { //Wywołwany po naciśnięciu przycisku Search.
+    const searchInput = document.querySelector('.pac-target-input');
+    searchInput.value=""
+    console.log(`state city is: ${this.state.locationSearchInput}`)
     const response = await fetch('http://localhost:3600/initCurrentUserGeoPosition', {
         method: 'POST', // *GET, POST, PUT, DELETE, etc.
         mode: 'cors', // no-cors, *cors, same-origin
@@ -50,22 +50,20 @@ class App extends Component {
         console.log(locationRes)
       } else {
         const { city, country, currentWeather } = locationRes;
-        console.log({
-          city:city,
-          country: country,
-          weather: currentWeather
-        })
+        console.log(city, country, currentWeather)
         this.setState({
+          locationSearchInput: "",
           currentLocation: [{
             city: city,
             country: country
           }],
-          currentWeather: currentWeather
+          currentWeather: currentWeather,
+          pacSuggestions: []
         })  
       }
   }
 
-  initCurrentUserPositionLoad = async ({coords}) => {
+  initCurrentUserPositionLoad = async ({coords}) => { //Inicjalizacji początkowej lokalizacji użytkownika oraz żądanie do serwera po dane pogodowe dla lokalizacji
     const { latitude, longitude } = coords;
       const response = await fetch('http://localhost:3600/initCurrentUserGeoPosition', {
         method: 'POST', // *GET, POST, PUT, DELETE, etc.
@@ -77,7 +75,7 @@ class App extends Component {
         headers: {"Content-Type": "application/json"}
       })
       const {city, country, currentWeather} = await response.json();
-      console.log( city, country, currentWeather)
+      console.log(city, country, currentWeather)
       this.setState(
         {
           currentLocation: [{
@@ -92,7 +90,7 @@ class App extends Component {
     const errorCallback = error => {
       console.log(error)
     }
-    navigator.geolocation.getCurrentPosition(this.initCurrentUserPositionLoad, errorCallback); // getting lat/lon geo position for initiated app user position. 
+    navigator.geolocation.getCurrentPosition(this.initCurrentUserPositionLoad, errorCallback); // Pobranie z API geo lokacji szer i dł geografivznej pozycji u żytkownika. Wywołanie funkcji
   }
 
   render() {
@@ -100,7 +98,12 @@ class App extends Component {
       <h1>Loading</h1>
     : 
     <React.Fragment>
-      <LocationSearch inputValue={this.state.locationSearchInput} inputChange={this.onLocationSearchInputChange} submitLocationSearch={this.onLocationSearchInputSubmit} dropdownChange={this.onDropdownSearchInputChange} pac={this.state.pacSuggestions}/>
+      <LocationSearch
+        inputChange={this.onLocationSearchInputChange} 
+        submitLocationSearch={this.onLocationSearchInputSubmit} 
+        pac={this.state.pacSuggestions}
+        onPacClick={this.onPacElementClick}
+      />
     </React.Fragment>
   }
 }

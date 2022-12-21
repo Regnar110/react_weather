@@ -2,26 +2,23 @@ import React from 'react';
 import '../styles/customInput.scss';
 
 const CustomSearchInput = (props) => {
-    const {data} = props.pac
-    if(data) {
-      const pacElements = data.map(el => el.split(",")); 
-      console.log(pacElements) 
-    }
-    
-    
+    const {data} = props.pac    
     return(
         <div className='pac-input'>
-            <input className='pac-target-input' type='text' onChange={props.onChange} />
+            <input className='pac-target-input' type='text' value={props.inputValue} onChange={props.onChange} placeholder='enter the name of the city'/>
             <div className='pac-dropdown'>
                 {
                     data ? 
-                        data.map(el => el.split(",")).map((el, i) => 
-                            <div className='pac-element' key={i}>
-                                <i className="fa-solid fa-location-pin fa-xs"></i>
-                                {el[0]}, <span>
-                                    {`${el[1]} ${el[2]? `, ${el[2]}`:''}`}
-                                    </span>
-                            </div>)
+                        data.map((el, i) => {
+                            const slicedElements = el.slice(0, 3)
+                                return (
+                                    <div className='pac-element' key={i}>
+                                        <i className="fa-solid fa-location-pin fa-xs"/>
+                                        <div className='pac-city-name' name={slicedElements[1]} onClick={props.onPacClick}>{slicedElements[0]}</div>
+                                    </div>
+                                )
+                            
+                        })
                         :
                         undefined
                 }
