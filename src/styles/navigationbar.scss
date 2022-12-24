@@ -1,0 +1,12 @@
+.site-navigation {
+    background-color: hsl(195, 100%, 45%);
+
+    #site-header {
+        color: white;
+    }
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+}
