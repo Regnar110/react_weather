@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
-import LocationSearch from '../components/LocationSearch';
+import Navbar from '../components/Navbar';
 import '../styles/App.scss';
+import WeatherSection from './WeatherSection.js';
 
 class App extends Component {
   constructor(){
@@ -98,12 +99,13 @@ class App extends Component {
       <h1>Loading</h1>
     : 
     <React.Fragment>
-      <LocationSearch
+      <Navbar
         inputChange={this.onLocationSearchInputChange} 
         submitLocationSearch={this.onLocationSearchInputSubmit} 
         pac={this.state.pacSuggestions}
         onPacClick={this.onPacElementClick}
       />
+      <WeatherSection />
     </React.Fragment>
   }
 }

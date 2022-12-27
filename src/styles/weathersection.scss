@@ -1,0 +1,10 @@
+.weather_section_container {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    flex: 1 1 100%;
+    .weather_card {
+        flex-grow: 1;
+        border: 1px solid black;
+    }
+}

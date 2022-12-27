@@ -1,8 +1,7 @@
 import React from 'react';
 import '../styles/custombutton.scss'
 
-const CustomButton = (props) => {
-    const {type, text, eventHandler} = props;
+const CustomButton = ({type, text, eventHandler}) => {
     return (
         <button id='customButton' type={type} onClick={eventHandler}>{text}</button>
     )

@@ -2,7 +2,6 @@
 
 
 .top-fixed-nav {
-    position: fixed;
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -10,16 +9,9 @@
     background-color: hsl(195, 100%, 45%);
     padding: 50px 10px;
 
-    .searchField {
-        width: 100%;
-        margin: 30px 0px;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-
         .inputAndSubmit {
-            width: 60%;
+            width: 100%;
+            margin: 30px 0px;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -36,5 +28,4 @@
                 overflow-x: hidden;
                 overflow-y: scroll;  
           }
-        }
     }

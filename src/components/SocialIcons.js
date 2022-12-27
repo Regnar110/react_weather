@@ -1,13 +1,8 @@
 import React from 'react';
-import { useEffect } from 'react';
 import FontAwesomeIcon from './FontAwesomeIcon';
-import '../styles/navigationbar.scss'
+import '../styles/socialicons.scss'
 
-const NavigationBar = () => {
-
-    useEffect(() => {
-        console.log(`halo`)
-      }, []);
+const SocialIcons = () => {
     const socialIcons = [
         {
             name: "Github",
@@ -31,7 +26,6 @@ const NavigationBar = () => {
     
     return(
         <div className='site-navigation'>
-            <h1 id="site-header">Check your weather!</h1>
             {
                 socialIcons.map((el, i) => <FontAwesomeIcon key={i} {...el}/>)
             }
@@ -39,4 +33,4 @@ const NavigationBar = () => {
     )
 }
 
-export default NavigationBar;
+export default SocialIcons;
