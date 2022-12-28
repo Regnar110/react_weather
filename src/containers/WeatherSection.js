@@ -1,5 +1,7 @@
 import React, {Component} from 'react';
 import '../styles/weathersection.scss';
+import WeatherOptionDrop from '../components/WeatherOptionDrop';
+import WeatherCard from '../components/WeatherCard';
 
 class WeatherSection extends Component {
     constructor() {
@@ -11,13 +13,8 @@ class WeatherSection extends Component {
     render() {
         return(
             <div className='weather_section_container'>
-                <div className='weather_card card_1'>Card</div>
-                <div className='weather_card card_2'>Card</div>
-                <div className='weather_card card_3'>Card</div>
-                <div className='weather_card card_4'>Card</div>
-                <div className='weather_card card_5'>Card</div>
-                <div className='weather_card card_6'>Card</div>
-                <div className='weather_card card_7'>Card</div>
+                <WeatherCard />
+                <WeatherOptionDrop />
             </div>
         )
     }

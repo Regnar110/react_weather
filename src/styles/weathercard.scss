@@ -1,0 +1,78 @@
+.weather-card {
+    position: relative;
+    display: flex;
+    padding: 50px 20px;
+    margin-top: 5px;
+    background-color: hsl(195, 100%, 45%);
+    font-family: 'Cairo', sans-serif;
+    .weather-top-bar {
+        background-color: hsl(195, 100%, 45%);
+        position: absolute;
+        top: 35px;
+        left: 30px;
+        display: flex;
+        gap: 15px;
+        padding: 0px 10px;
+
+        .wtb-data {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            img {
+                width: 20px;
+            }
+        }
+    }
+    .weather-card-data-subcontainer {
+        padding: 50px 20px;
+        border: 1px solid white;
+        width: 100%;
+        display: flex;
+        gap: 20px;
+
+        .weather-temperature-and-icon {
+            display: flex;
+            gap: 30px;
+            align-items: center;
+            img {
+                width: 150px;
+            }
+            .current-temperature {
+                font-size: 100px;
+                color: white;
+            }
+        }
+
+        .weather-additional-data {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+
+            .clouds {
+                font-size: 20px;
+                color: white;
+            }
+
+            .rest-additional-data {
+                display: flex;
+                gap: 25px;
+                
+                .additional-data {
+                    display: flex;
+                    flex-direction: column;
+                    row-gap: 0px;
+
+                    .rad-description {
+                        color: #bccae0;
+                        font-weight: 900;
+                    }
+                    
+                    .rad-data {
+                        color: white;
+                    }
+                }
+            }
+        }
+    }
+
+}

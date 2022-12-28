@@ -1,0 +1,21 @@
+.weather-option-drop {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    div {
+        // border: 1px solid hsl(195, 100%, 45%);
+        padding: 20px 50px;
+        font-family: 'Lato', sans-serif;
+        color: hsl(195, 100%, 45%);
+        background-color: hsl(0, 0%, 100%);
+        cursor: pointer;
+        transition: 0.3s all;
+
+        &:hover {
+            background-color: hsl(195, 100%, 45%);
+            color: white;
+        }
+    }
+}
