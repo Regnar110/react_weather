@@ -2,20 +2,28 @@ import React from 'react';
 import '../styles/weathercard.scss'
 import sun from '../assets/sun.png'
 import sunrise from '../assets/wtb-sunrise.png'
+import WeatherOptionDrop from '../components/WeatherOptionDrop';
+import { Chart } from 'react-charts'
 
 const WeatherCard = () => {
     return(
         <React.Fragment>
             <div className='weather-card'>
-                <div className='weather-top-bar'>
-                    <span className='wtb-date'>Weather now - today 00:28</span>
-                    <div className='wtb-data wtb-sunrise'><img src={sunrise} alt='sunrise'/>10:00 - 15:00</div>
-                </div>
+                <span className='city-card-name'>Warsaw</span>
                 <div className='weather-card-data-subcontainer'>
-                    <div className='weather-temperature-and-icon'>
-                        <img src={sun} alt='weather-icon'/>
-                        <div className='current-temperature'>
-                        -20°C
+                    <div className='weather-top-bar'>
+                        <span className='wtb-date'>00:28</span>
+                        <div className='wtb-data wtb-sunrise'><img src={sunrise} alt='sunrise'/>10:00 - 15:00</div>
+                    </div>
+                    <div className='weather-card-main-data'>
+                        <div className='day-name-and-date'>
+                            Monday - 29 December
+                        </div>
+                        <div className='weather-temperature-and-icon'>
+                            <img src={sun} alt='weather-icon'/>
+                            <div className='current-temperature'>
+                            -20°C
+                            </div>
                         </div>
                     </div>
                     <div className='weather-additional-data'>
@@ -35,6 +43,7 @@ const WeatherCard = () => {
                         </div>
                     </div>
                 </div>
+                <WeatherOptionDrop />
             </div>
         </React.Fragment>
     )
