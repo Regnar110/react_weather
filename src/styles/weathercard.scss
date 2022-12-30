@@ -2,6 +2,7 @@
     position: relative;
     display: flex;
     flex-direction: column;
+    width: 80%;
     padding: 20px 20px;
     margin-top: 5px;
     background-color: hsl(195, 100%, 45%);
@@ -14,11 +15,26 @@
     }
     .weather-card-data-subcontainer {
         position: relative;
-        padding: 50px 20px;
+        padding: 30px 20px;
         border: 1px solid white;
         width: 100%;
         display: flex;
+        flex-direction: column;
         gap: 20px;
+
+        
+        .day-name-and-date {
+            width: 100%;
+            font-family: 'Lato', sans-serif;
+            font-size: 40px;
+            color: white;
+            display: flex;
+            flex-direction: column;
+
+            span:nth-child(2) {
+                font-size: 15px;
+            }
+        }
 
         .weather-top-bar {
             background-color: hsl(195, 100%, 45%);
@@ -39,57 +55,58 @@
             }
         }
 
-        .weather-card-main-data {
+
+        .card-datas {
             display: flex;
-            flex-direction: column;
-
-            .day-name-and-date {
-                font-family: 'Lato', sans-serif;
-                font-size: 30px;
-                color: white;
-            }
-
-            .weather-temperature-and-icon {
+            flex-wrap: wrap;
+            flex-direction: row;
+            gap: 40px;
+            .weather-card-main-data {
                 display: flex;
-                gap: 30px;
-                align-items: center;
-                img {
-                    width: 150px;
+                flex-direction: column;
+    
+                .weather-temperature-and-icon {
+                    display: flex;
+                    gap: 30px;
+                    align-items: center;
+                    img {
+                        width: 150px;
+                    }
+                    .current-temperature {
+                        font-size: 100px;
+                        color: white;
+                    }
                 }
-                .current-temperature {
-                    font-size: 100px;
+            }
+    
+    
+            .weather-additional-data {
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+    
+                .clouds {
+                    font-size: 20px;
                     color: white;
                 }
-            }
-        }
-
-
-        .weather-additional-data {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-
-            .clouds {
-                font-size: 20px;
-                color: white;
-            }
-
-            .rest-additional-data {
-                display: flex;
-                gap: 25px;
-                
-                .additional-data {
+    
+                .rest-additional-data {
                     display: flex;
-                    flex-direction: column;
-                    row-gap: 0px;
-
-                    .rad-description {
-                        color: #bccae0;
-                        font-weight: 900;
-                    }
+                    gap: 25px;
                     
-                    .rad-data {
-                        color: white;
+                    .additional-data {
+                        display: flex;
+                        flex-direction: column;
+                        row-gap: 0px;
+    
+                        .rad-description {
+                            color: #bccae0;
+                            font-weight: 900;
+                        }
+                        
+                        .rad-data {
+                            color: white;
+                        }
                     }
                 }
             }
