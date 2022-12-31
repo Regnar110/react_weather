@@ -95,9 +95,7 @@ class App extends Component {
   }
 
   render() {
-    return this.state.currentLocation.length === 0  && this.state.currentWeather ?
-      <h1>Loading</h1>
-    : 
+    return(
     <React.Fragment>
       <Navbar
         inputChange={this.onLocationSearchInputChange} 
@@ -107,7 +105,11 @@ class App extends Component {
       />
       <WeatherSection />
     </React.Fragment>
-  }
+  )}
 }
 
 export default App;
+
+// this.state.currentLocation.length === 0  && this.state.currentWeather ?
+// <h1>Loading</h1>
+// : 
