@@ -3,11 +3,12 @@ import '../styles/weathercard.scss'
 import sun from '../assets/sun.png'
 import sunrise from '../assets/wtb-sunrise.png'
 
-const WeatherCard = () => {
+const WeatherCard = (props) => {
+    const {city, weather} = props
     return(
         <React.Fragment>
             <div className='weather-card'>
-                <span className='city-card-name'>Warsaw</span>
+                <span className='city-card-name'>{city}</span>
                 <div className='weather-card-data-subcontainer'>
                     <div className='weather-top-bar'>
                         <span className='wtb-date'>00:28</span>

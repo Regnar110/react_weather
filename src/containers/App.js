@@ -14,6 +14,33 @@ class App extends Component {
     }
   }
 
+  prepareWeathersDataForCardComponents = async (weatherDatas) => {
+    console.log(`prepare me` + weatherDatas)
+    const { hourly, daily, current_weather } = weatherDatas
+    const { cloudcover, weathercode, surface_pressure } = hourly // Jak podzielić te tablice żeby każda z nich zawierała po 7 subtablic, reprezentujące dane godzinowe dla kazdego z siedmiu dni?
+    const prepWeatherArrays = [current_weather]
+    for(let i=0;i<7;i++) {
+
+      const object = {
+        time: daily.time[i],
+        weatherCode: daily.weathercode[i],
+        temperature_2m_max: daily.temperature_2m_max[i],
+        temperature_2m_min: daily.temperature_2m_min[i],
+        apparent_temperature_max: daily.apparent_temperature_max[i],
+        apparent_temperature_min: daily.apparent_temperature_min[i],
+        rain_sum: daily.rain_sum[i]+" mm",
+        showers_sum: daily.showers_sum[i],
+        snowfall_sum: daily.snowfall_sum[i],
+        sunrise: daily.sunrise[i],
+        sunset: daily.sunset[i],
+      }
+      prepWeatherArrays.push(object)
+      if(i===0) {
+        prepWeatherArrays[0].current_weather = weatherDatas.current_weather
+      }
+    }
+  } 
+
   onLocationSearchInputChange = async (event) => { // wywołane przy zmianach w polu input wprowadzonych przez użytkownika. Wykonanie żądania do serwera o sugestie dotyczące wprowadzonego przez użytkownika słowa
     const response = await fetch('http://localhost:3600/suggestions', {
       method: 'POST', // *GET, POST, PUT, DELETE, etc.
@@ -37,7 +64,6 @@ class App extends Component {
   onLocationSearchInputSubmit = async () => { //Wywołwany po naciśnięciu przycisku Search.
     const searchInput = document.querySelector('.pac-target-input');
     searchInput.value=""
-    console.log(`state city is: ${this.state.locationSearchInput}`)
     const response = await fetch('http://localhost:3600/initCurrentUserGeoPosition', {
         method: 'POST', // *GET, POST, PUT, DELETE, etc.
         mode: 'cors', // no-cors, *cors, same-origin
@@ -47,11 +73,12 @@ class App extends Component {
         headers: {"Content-Type": "application/json"}
       })
       const locationRes = await response.json();
+      const preparedWeather = await this.prepareWeathersDataForCardComponents(locationRes.currentWeather)
       if('error' in locationRes) {
         console.log(locationRes)
       } else {
         const { city, country, currentWeather } = locationRes;
-        console.log(city, country, currentWeather)
+        console.log(currentWeather)
         this.setState({
           locationSearchInput: "",
           currentLocation: [{
@@ -76,7 +103,7 @@ class App extends Component {
         headers: {"Content-Type": "application/json"}
       })
       const {city, country, currentWeather} = await response.json();
-      console.log(city, country, currentWeather)
+      const preparedWeather = await this.prepareWeathersDataForCardComponents(currentWeather)
       this.setState(
         {
           currentLocation: [{
@@ -95,7 +122,9 @@ class App extends Component {
   }
 
   render() {
-    return(
+      return this.state.currentLocation.length === 0  && this.state.currentWeather ?
+      <h1>Loading</h1>
+      : 
     <React.Fragment>
       <Navbar
         inputChange={this.onLocationSearchInputChange} 
@@ -103,13 +132,9 @@ class App extends Component {
         pac={this.state.pacSuggestions}
         onPacClick={this.onPacElementClick}
       />
-      <WeatherSection />
+      <WeatherSection city={this.state.currentLocation} weather={this.state.currentWeather} />
     </React.Fragment>
-  )}
+  }
 }
 
 export default App;
-
-// this.state.currentLocation.length === 0  && this.state.currentWeather ?
-// <h1>Loading</h1>
-// : 
