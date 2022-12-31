@@ -18,27 +18,53 @@ class App extends Component {
     console.log(`prepare me` + weatherDatas)
     const { hourly, daily, current_weather } = weatherDatas
     const { cloudcover, weathercode, surface_pressure } = hourly // Jak podzielić te tablice żeby każda z nich zawierała po 7 subtablic, reprezentujące dane godzinowe dla kazdego z siedmiu dni?
-    const prepWeatherArrays = [current_weather]
-    for(let i=0;i<7;i++) {
+    const arraysToDivide = [cloudcover, weathercode, surface_pressure];
+const keys = ["cloudcover", "weathercode", "surface_pressure"];
+const numberOfArrays = 3;
+const elementsPerArray = 24;
+const numberOfSubarraysToKeep = 7;
 
-      const object = {
-        time: daily.time[i],
-        weatherCode: daily.weathercode[i],
-        temperature_2m_max: daily.temperature_2m_max[i],
-        temperature_2m_min: daily.temperature_2m_min[i],
-        apparent_temperature_max: daily.apparent_temperature_max[i],
-        apparent_temperature_min: daily.apparent_temperature_min[i],
-        rain_sum: daily.rain_sum[i]+" mm",
-        showers_sum: daily.showers_sum[i],
-        snowfall_sum: daily.snowfall_sum[i],
-        sunrise: daily.sunrise[i],
-        sunset: daily.sunset[i],
-      }
-      prepWeatherArrays.push(object)
-      if(i===0) {
-        prepWeatherArrays[0].current_weather = weatherDatas.current_weather
-      }
+const result = {};
+
+for (let i = 0; i < numberOfArrays; i++) {
+  const originalArray = arraysToDivide[i];
+  let index = 0;
+  const subarrays = originalArray.map(() => {
+    const subarray = originalArray.slice(index, index + elementsPerArray);
+    index += elementsPerArray;
+    return subarray;
+  });
+
+  result[keys[i]] = subarrays;
+}
+
+for (const key in result) {
+  result[key] = result[key].slice(0, numberOfSubarraysToKeep);
+}
+   
+  const prepWeatherArrays = [current_weather]
+  for(let i=0;i<7;i++) {
+  const object = {
+    time: daily.time[i],
+    temperature_2m_max: daily.temperature_2m_max[i],
+    temperature_2m_min: daily.temperature_2m_min[i],
+    apparent_temperature_max: daily.apparent_temperature_max[i],
+    apparent_temperature_min: daily.apparent_temperature_min[i],
+    rain_sum: daily.rain_sum[i]+" mm",
+    showers_sum: daily.showers_sum[i],
+    snowfall_sum: daily.snowfall_sum[i],
+    sunrise: daily.sunrise[i],
+    sunset: daily.sunset[i],
+    cloudcover: result.cloudcover[i],
+    weathercode: result.weathercode[i],
+    surface_pressure: result.surface_pressure[i]
+  }
+    prepWeatherArrays.push(object)
+    if(i===0) {
+      prepWeatherArrays[0].current_weather = weatherDatas.current_weather
     }
+  }
+  console.log(prepWeatherArrays)
   } 
 
   onLocationSearchInputChange = async (event) => { // wywołane przy zmianach w polu input wprowadzonych przez użytkownika. Wykonanie żądania do serwera o sugestie dotyczące wprowadzonego przez użytkownika słowa
