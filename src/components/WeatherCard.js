@@ -33,7 +33,7 @@ const WeatherCard = (props) => {
                             <div className='clouds'>
                                 <i className="fa-solid fa-cloud"></i>
                                 {
-                                    cloudsType.map(el => el.cover === Math.round(cloudcover[dateIndex]/10)*10 ? " " + el.type : console.log(cloudcover[dateIndex]))
+                                    cloudsType.map(el => el.cover === Math.round(cloudcover[dateIndex]/10)*10 ? " " + el.type : "")
                                 }
                             </div>
                             <div className='rest-additional-data'>
