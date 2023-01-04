@@ -1,9 +1,9 @@
 import React from 'react';
 import '../styles/weathercard.scss'
 import sunriseImg from '../assets/wtb-sunrise.png'
-import clearDay from '../assets/wmo/day/partly-cloudy-day-rain.svg'
 
-const WeatherCard = ({city, weather, cloudsType, currentLocationTime}) => {
+const WeatherCard = ({city, weather, cloudsType, currentLocationTime, weatherIcon}) => {
+    console.log(weatherIcon)
     const dateIndex = new Date().getHours();
     const {time, cloudcover, temperature_2m_min, temperature_2m_max, sunset, sunrise, snowfall_sum, showers_sum, rain_sum, current_weather, apparent_temperature, windspeed_10m, apparent_temperature_max, apparent_temperature_min, surface_pressure, predicted_temperature} = weather;
     return(
@@ -22,7 +22,7 @@ const WeatherCard = ({city, weather, cloudsType, currentLocationTime}) => {
                     <div className='card-datas'>
                         <div className='weather-card-main-data'>
                             <div className='weather-temperature-and-icon'>
-                                <img src={clearDay} alt='weather-icon'/>
+                                <img src={weatherIcon} alt='weather-icon'/>
                                 <div className='current-temperature'>
                                     {current_weather ? Math.round(current_weather.temperature)+"°C" : Math.round(predicted_temperature) +"°C"}
                                 </div>

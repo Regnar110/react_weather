@@ -1,9 +1,16 @@
 import React  from 'react';
 import '../styles/weathersection.scss';
 import WeatherCard from '../components/WeatherCard';
-import {daySvgs, nightSvgs} from '../components/weatherTypeCodes.js'
+import weatherIconsObject from '../appFunctionalities/weatherTypeCodes.js'
 
 const WeatherSection = ({city, weather, currentLocationTime}) => {
+    let hoursIndex = new Date().getHours();
+    let weatherIconsAndCodes;
+    if(currentLocationTime > weather[0].sunset) {
+        weatherIconsAndCodes = weatherIconsObject({night:true})
+    } else {
+        weatherIconsAndCodes = weatherIconsObject({day: true})
+    }
     const cloudsType = [
         {
             type: "Cloudless",
@@ -56,12 +63,22 @@ const WeatherSection = ({city, weather, currentLocationTime}) => {
             {
                 weather.map((el, i) => {
                     if(i === 0) {
-                        return <WeatherCard cloudsType={cloudsType} city={city[0].city} weather={el} currentLocationTime={currentLocationTime} key={i} />
-                    } else {
-                        return <WeatherCard cloudsType={cloudsType} weather={el} currentLocationTime={currentLocationTime} key={i} />
+                        return <WeatherCard cloudsType={cloudsType} city={city[0].city} weather={el} currentLocationTime={currentLocationTime} weatherIcon={weatherIconsAndCodes[weather[i].weathercode[hoursIndex]]} key={i} />
                     }
+                    return ""; 
                 })
             }
+            <div className='six_days_predictions'>
+                <span id='days_predictions_head'> Forecast for the next 6 days </span>
+                {
+                    weather.map((el, i) => {
+                        if(i > 0) {
+                            return <WeatherCard cloudsType={cloudsType} weather={el} currentLocationTime={currentLocationTime} weatherIcon={weatherIconsAndCodes[weather[i].weathercode[hoursIndex]]} key={i} />
+                        }
+                        return "";
+                    })
+                }
+            </div>
         </div>
     )
 }

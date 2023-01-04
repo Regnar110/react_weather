@@ -8,6 +8,23 @@
     flex-direction: column;
     flex-wrap: wrap;
     flex: 1 1 100%;
+
+    .six_days_predictions {
+        width: inherit;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        
+        #days_predictions_head {
+            font-size: calc(25px + (50 - 25) * ((100vw - 300px) / (1600 - 300)));
+            font-family: "Lato", sans-serif;
+            margin-top: 20px;
+            margin-bottom: 20px;
+            color: hsl(195deg, 100%, 45%);
+        }
+    }
+
     .weather_card {
         flex-grow: 1;
         border: 1px solid black;
