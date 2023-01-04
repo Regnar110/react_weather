@@ -1,8 +1,9 @@
 import React  from 'react';
 import '../styles/weathersection.scss';
 import WeatherCard from '../components/WeatherCard';
+import {daySvgs, nightSvgs} from '../components/weatherTypeCodes.js'
 
-const WeatherSection = ({city, weather}) => {
+const WeatherSection = ({city, weather, currentLocationTime}) => {
     const cloudsType = [
         {
             type: "Cloudless",
@@ -55,9 +56,9 @@ const WeatherSection = ({city, weather}) => {
             {
                 weather.map((el, i) => {
                     if(i === 0) {
-                        return <WeatherCard cloudsType={cloudsType} city={city[0].city} weather={el} key={i} />
+                        return <WeatherCard cloudsType={cloudsType} city={city[0].city} weather={el} currentLocationTime={currentLocationTime} key={i} />
                     } else {
-                        return <WeatherCard cloudsType={cloudsType} weather={el} key={i} />
+                        return <WeatherCard cloudsType={cloudsType} weather={el} currentLocationTime={currentLocationTime} key={i} />
                     }
                 })
             }

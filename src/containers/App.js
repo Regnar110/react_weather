@@ -1,4 +1,3 @@
-import { getByDisplayValue } from '@testing-library/react';
 import React, {Component} from 'react';
 import Navbar from '../components/Navbar';
 import '../styles/App.scss';
@@ -10,6 +9,7 @@ class App extends Component {
     this.state = {
       locationSearchInput: "",
       currentLocation: [],
+      currentLocationTime: '',
       currentWeather: [],
       pacSuggestions: []
     }
@@ -148,13 +148,14 @@ prepareWeathersDataForCardComponents = async (weatherDatas) => { // funkcja zwra
       if('error' in locationRes) {
         console.log(locationRes)
       } else {
-        const { city, country } = locationRes;
+        const { city, country, currentLocationTime } = locationRes;
         this.setState({
           locationSearchInput: "",
           currentLocation: [{
             city: city,
             country: country
           }],
+          currentLocationTime: currentLocationTime,
           currentWeather: preparedWeather,
           pacSuggestions: []
         })  
@@ -173,7 +174,7 @@ prepareWeathersDataForCardComponents = async (weatherDatas) => { // funkcja zwra
         }),
         headers: {"Content-Type": "application/json"}
       })
-      const {city, country, currentWeather} = await response.json();
+      const {city, country, currentWeather, currentLocationTime} = await response.json();
       const preparedWeather = await this.prepareWeathersDataForCardComponents(currentWeather) // przekazanie odpowiedzi z serwera funkcji prepareWeathersDataForCardComponent, która zwróci
       // przygotowaną tablicę z obiektami pogodowymi reprezentującymi każdy z 7 dni.
       this.setState(
@@ -182,6 +183,7 @@ prepareWeathersDataForCardComponents = async (weatherDatas) => { // funkcja zwra
             city: city,
             country: country,
           }],
+          currentLocationTime: currentLocationTime,
           currentWeather: preparedWeather
         })
   }
@@ -204,7 +206,7 @@ prepareWeathersDataForCardComponents = async (weatherDatas) => { // funkcja zwra
         pac={this.state.pacSuggestions}
         onPacClick={this.onPacElementClick}
       />
-      <WeatherSection city={this.state.currentLocation} weather={this.state.currentWeather} />
+      <WeatherSection city={this.state.currentLocation} weather={this.state.currentWeather} currentLocationTime={this.state.currentLocationTime} />
     </React.Fragment>
   }
 }

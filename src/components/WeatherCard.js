@@ -1,10 +1,9 @@
 import React from 'react';
 import '../styles/weathercard.scss'
-import sun from '../assets/sun.png'
 import sunriseImg from '../assets/wtb-sunrise.png'
+import clearDay from '../assets/wmo/day/partly-cloudy-day-rain.svg'
 
-const WeatherCard = (props) => {
-    const {city, weather, cloudsType} = props
+const WeatherCard = ({city, weather, cloudsType, currentLocationTime}) => {
     const dateIndex = new Date().getHours();
     const {time, cloudcover, temperature_2m_min, temperature_2m_max, sunset, sunrise, snowfall_sum, showers_sum, rain_sum, current_weather, apparent_temperature, windspeed_10m, apparent_temperature_max, apparent_temperature_min, surface_pressure, predicted_temperature} = weather;
     return(
@@ -13,7 +12,7 @@ const WeatherCard = (props) => {
                 <span className='city-card-name'>{city}</span>
                 <div className='weather-card-data-subcontainer'>
                     <div className='weather-top-bar'>
-                        <span className='wtb-date'>{new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}</span>
+                        <span className='wtb-date'>{currentLocationTime}</span>
                         <div className='wtb-data wtb-sunrise'><img src={sunriseImg} alt='sunrise'/>{`${sunrise} - ${sunset}`} <i class="fa-solid fa-moon" style={{color: 'white', paddingLeft:"5px" }}></i></div>
                     </div>
                     <div className='day-name-and-date'>
@@ -23,7 +22,7 @@ const WeatherCard = (props) => {
                     <div className='card-datas'>
                         <div className='weather-card-main-data'>
                             <div className='weather-temperature-and-icon'>
-                                <img src={sun} alt='weather-icon'/>
+                                <img src={clearDay} alt='weather-icon'/>
                                 <div className='current-temperature'>
                                     {current_weather ? Math.round(current_weather.temperature)+"°C" : Math.round(predicted_temperature) +"°C"}
                                 </div>
