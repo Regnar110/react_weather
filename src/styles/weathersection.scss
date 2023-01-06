@@ -1,6 +1,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Cairo&display=swap');
 
 .weather_section_container {
+    background: url("../assets/pexels-jan-kopřiva-3634855.jpg") no-repeat center fixed;
+    background-size: cover;
     width: 100%;
     display: flex;
     justify-content: center;
@@ -8,6 +10,7 @@
     flex-direction: column;
     flex-wrap: wrap;
     flex: 1 1 100%;
+    padding-bottom: 40px;
 
     .six_days_predictions {
         width: inherit;
@@ -18,6 +21,9 @@
         
         #days_predictions_head {
             font-size: calc(25px + (50 - 25) * ((100vw - 300px) / (1600 - 300)));
+            text-align: center;
+            width: 100%;
+            padding: 20px;
             font-family: "Lato", sans-serif;
             margin-top: 20px;
             margin-bottom: 20px;

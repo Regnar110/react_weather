@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import Navbar from '../components/Navbar';
 import '../styles/App.scss';
 import WeatherSection from './WeatherSection.js';
+import Loading from '../components/Loading.js'
 
 //FUNCTIONALITIES
 
@@ -104,7 +105,7 @@ class App extends Component {
 
   render() {
       return this.state.currentLocation.length === 0  && this.state.currentWeather ?
-      <h1>Loading</h1>
+      <Loading />
       : 
     <React.Fragment>
       <Navbar

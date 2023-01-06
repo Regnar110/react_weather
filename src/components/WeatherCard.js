@@ -3,7 +3,6 @@ import '../styles/weathercard.scss'
 import sunriseImg from '../assets/wtb-sunrise.png'
 
 const WeatherCard = ({city, weather, cloudsType, currentLocationTime, weatherIcon}) => {
-    console.log(weatherIcon)
     const dateIndex = new Date().getHours();
     const {time, cloudcover, temperature_2m_min, temperature_2m_max, sunset, sunrise, snowfall_sum, showers_sum, rain_sum, current_weather, apparent_temperature, windspeed_10m, apparent_temperature_max, apparent_temperature_min, surface_pressure, predicted_temperature} = weather;
     return(

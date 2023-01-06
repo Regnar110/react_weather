@@ -6,9 +6,11 @@ import weatherIconsObject from '../appFunctionalities/weatherTypeCodes.js'
 const WeatherSection = ({city, weather, currentLocationTime}) => {
     let hoursIndex = new Date().getHours();
     let weatherIconsAndCodes;
-    if(currentLocationTime > weather[0].sunset) {
+    if(currentLocationTime > weather[0].sunset || currentLocationTime < weather[0].sunrise) {
+        console.log(`NIGHT currentTime: ${currentLocationTime}. sunset: ${weather[0].sunset}. sunrise: ${weather[0].sunrise}`)
         weatherIconsAndCodes = weatherIconsObject({night:true})
     } else {
+        console.log(`DAY currentTime: ${currentLocationTime}. sunset: ${weather[0].sunset}. sunrise: ${weather[0].sunrise}`)
         weatherIconsAndCodes = weatherIconsObject({day: true})
     }
     const cloudsType = [
