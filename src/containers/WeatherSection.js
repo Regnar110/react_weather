@@ -2,17 +2,15 @@ import React  from 'react';
 import '../styles/weathersection.scss';
 import WeatherCard from '../components/WeatherCard';
 import weatherIconsObject from '../appFunctionalities/weatherTypeCodes.js'
+import checkIfNightOrDay from '../appFunctionalities/checkIfNightOrDay';
 
 const WeatherSection = ({city, weather, currentLocationTime}) => {
     let hoursIndex = new Date().getHours();
     let weatherIconsAndCodes;
-    if(currentLocationTime > weather[0].sunset || currentLocationTime < weather[0].sunrise) {
-        console.log(`NIGHT currentTime: ${currentLocationTime}. sunset: ${weather[0].sunset}. sunrise: ${weather[0].sunrise}`)
-        weatherIconsAndCodes = weatherIconsObject({night:true})
-    } else {
-        console.log(`DAY currentTime: ${currentLocationTime}. sunset: ${weather[0].sunset}. sunrise: ${weather[0].sunrise}`)
-        weatherIconsAndCodes = weatherIconsObject({day: true})
-    }
+
+    const nightOrDay = checkIfNightOrDay(currentLocationTime, weather[0].sunset, weather[0].sunrise)
+    nightOrDay === "night" ? weatherIconsAndCodes = weatherIconsObject({night:true}) : weatherIconsAndCodes = weatherIconsObject({day: true})
+
     const cloudsType = [
         {
             type: "Cloudless",
