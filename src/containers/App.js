@@ -5,7 +5,6 @@ import WeatherSection from './WeatherSection.js';
 import Loading from '../components/Loading.js'
 
 //FUNCTIONALITIES
-
 import prepareWeathersDataForCardComponents from '../appFunctionalities/prepareWeatherDatas.js';
 
 class App extends Component {
@@ -33,7 +32,7 @@ class App extends Component {
     this.setState({pacSuggestions: data, locationSearchInput: event.target.value})
   }
 
-  onPacElementClick = (event) => {
+  onPacElementClick = (event) => { // funkcja  wywoływana na kliknięcie elementu w rozwijanym menu sugestii.
     const locationName = event.target.attributes.name.value;
     this.setState({
       locationSearchInput: locationName
@@ -72,6 +71,7 @@ class App extends Component {
 
   initCurrentUserPositionLoad = async ({coords}) => { //Inicjalizacji początkowej lokalizacji użytkownika oraz żądanie do serwera po dane pogodowe dla lokalizacji
     //obiekt coords otrzymywany jest z API navigator.geolocation.getCurrentPosition
+    console.log('jestem w inicjalizacji')
     const { latitude, longitude } = coords;
       const response = await fetch('http://localhost:3600/initCurrentUserGeoPosition', {
         method: 'POST', // *GET, POST, PUT, DELETE, etc.
@@ -98,7 +98,7 @@ class App extends Component {
 
   componentDidMount() {  
     const errorCallback = error => {
-      console.log(`Error Callback: Cannot resolve navigator gelocoation getCurrentPosition succes callback function. Error object: ${error}`)
+      console.log(error)
     }
     navigator.geolocation.getCurrentPosition(this.initCurrentUserPositionLoad, errorCallback); // Pobranie z API geo lokacji szer i dł geografivznej pozycji u żytkownika. Wywołanie funkcji
   }

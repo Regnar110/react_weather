@@ -63,7 +63,7 @@ const WeatherSection = ({city, weather, currentLocationTime}) => {
             {
                 weather.map((el, i) => {
                     if(i === 0) {
-                        return <WeatherCard cloudsType={cloudsType} city={city[0].city} weather={el} currentLocationTime={currentLocationTime} weatherIcon={weatherIconsAndCodes[weather[i].weathercode[hoursIndex]]} key={i} />
+                        return <WeatherCard cloudsType={cloudsType} city={city[0].city} country={city[0].country} weather={el} currentLocationTime={currentLocationTime} weatherIcon={weatherIconsAndCodes[weather[i].weathercode[hoursIndex]]} key={i} />
                     }
                     return ""; 
                 })

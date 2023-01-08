@@ -2,17 +2,18 @@ import React from 'react';
 import '../styles/weathercard.scss'
 import sunriseImg from '../assets/wtb-sunrise.png'
 
-const WeatherCard = ({city, weather, cloudsType, currentLocationTime, weatherIcon}) => {
+const WeatherCard = ({city, country, weather, cloudsType, currentLocationTime, weatherIcon}) => {
     const dateIndex = new Date().getHours();
     const {time, cloudcover, temperature_2m_min, temperature_2m_max, sunset, sunrise, snowfall_sum, showers_sum, rain_sum, current_weather, apparent_temperature, windspeed_10m, apparent_temperature_max, apparent_temperature_min, surface_pressure, predicted_temperature} = weather;
     return(
         <React.Fragment>
             <div className='weather-card'>
                 <span className='city-card-name'>{city}</span>
+                <span className='city-card-country'>{country}</span>
                 <div className='weather-card-data-subcontainer'>
                     <div className='weather-top-bar'>
                         <span className='wtb-date'>{currentLocationTime}</span>
-                        <div className='wtb-data wtb-sunrise'><img src={sunriseImg} alt='sunrise'/>{`${sunrise} - ${sunset}`} <i class="fa-solid fa-moon" style={{color: 'white', paddingLeft:"5px" }}></i></div>
+                        <div className='wtb-data wtb-sunrise'><img src={sunriseImg} alt='sunrise'/>{`${sunrise} - ${sunset}`} <i className="fa-solid fa-moon" style={{color: 'white', paddingLeft:"5px" }}></i></div>
                     </div>
                     <div className='day-name-and-date'>
                         <span>{time[0]}</span>
