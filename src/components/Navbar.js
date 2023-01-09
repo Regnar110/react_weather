@@ -1,4 +1,3 @@
-import React, {Component} from 'react';
 import '../styles/navbar.scss';
 import CustomSearchInput from './CustomSearchInput';
 import CustomButton from './CustomButton.js'
