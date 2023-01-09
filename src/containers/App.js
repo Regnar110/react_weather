@@ -103,6 +103,11 @@ class App extends Component {
   componentDidMount() {  
     const errorCallback = error => {
       console.log(error)
+      this.initCurrentUserPositionLoad({coords: {
+        latitude: 52.237049,
+        longitude: 21.017532
+      }
+      })
     }
     navigator.geolocation.getCurrentPosition(this.initCurrentUserPositionLoad, errorCallback); // Pobranie z API geo lokacji szer i dł geografivznej pozycji u żytkownika. Wywołanie funkcji
   }
