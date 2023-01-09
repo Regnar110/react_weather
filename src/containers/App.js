@@ -20,7 +20,7 @@ class App extends Component {
   }
 
   onLocationSearchInputChange = async (event) => { // wywołane przy zmianach w polu input wprowadzonych przez użytkownika. Wykonanie żądania do serwera o sugestie dotyczące wprowadzonego przez użytkownika słowa
-    const response = await fetch('http://localhost:3600/suggestions', {
+    const response = await fetch('https://reactweatherserverapi.ey.r.appspot.com/suggestions', {
       method: 'POST', // *GET, POST, PUT, DELETE, etc.
       mode: 'cors', // no-cors, *cors, same-origin
       body: JSON.stringify({
@@ -42,7 +42,7 @@ class App extends Component {
   onLocationSearchInputSubmit = async () => { //Wywołwany po naciśnięciu przycisku Search.
     const searchInput = document.querySelector('.pac-target-input');
     searchInput.value="" // czyszczenie pola input po naciśnięciu przycisku wywołującego funkcję
-    const response = await fetch('http://localhost:3600/initCurrentUserGeoPosition', { // tworzenie obietnicy - metoda POST, poprzez body request
+    const response = await fetch('https://reactweatherserverapi.ey.r.appspot.com/initCurrentUserGeoPosition', { // tworzenie obietnicy - metoda POST, poprzez body request
         method: 'POST', // *GET, POST, PUT, DELETE, etc.
         mode: 'cors', // no-cors, *cors, same-origin
         body: JSON.stringify({
@@ -71,9 +71,10 @@ class App extends Component {
 
   initCurrentUserPositionLoad = async ({coords}) => { //Inicjalizacji początkowej lokalizacji użytkownika oraz żądanie do serwera po dane pogodowe dla lokalizacji
     //obiekt coords otrzymywany jest z API navigator.geolocation.getCurrentPosition
-    console.log('jestem w inicjalizacji')
     const { latitude, longitude } = coords;
-      const response = await fetch('http://localhost:3600/initCurrentUserGeoPosition', {
+    try {
+      console.log('try')
+      const response = await fetch('https://reactweatherserverapi.ey.r.appspot.com/initCurrentUserGeoPosition', {
         method: 'POST', // *GET, POST, PUT, DELETE, etc.
         mode: 'cors', // no-cors, *cors, same-origin
         body: JSON.stringify({
@@ -94,6 +95,9 @@ class App extends Component {
           currentLocationTime: currentLocationTime,
           currentWeather: preparedWeather
         })
+    } catch(err) {
+      console.log(err)
+    }
   }
 
   componentDidMount() {  
