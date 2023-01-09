@@ -1,7 +1,13 @@
 
 USED API's:
 
+*Google geoLocation
+*Google Timezone
+*Google Places (autocomplete)
 *Google revers geolocation
+*Browser Navigator API
+*Open-meteo API
+
 
 
 USED NPM's:
